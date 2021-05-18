@@ -142,7 +142,7 @@ private:
         int                                 _channels;
         int                                 _sampleRate;
         std::shared_ptr<ofxHap::RingBuffer> _buffer;
-        ofSoundStream                       _soundStream;
+       // ofSoundStream                       _soundStream;
     };
     class DecodedFrame {
     public:

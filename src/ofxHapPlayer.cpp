@@ -229,9 +229,9 @@ void ofxHapPlayer::foundStream(AVStream *stream)
 
         _audioOut.configure(channels, sampleRate, _buffer);
 
-        _audioThread = std::make_shared<ofxHap::AudioThread>(parameters, sampleRate, _buffer, *this);
+        /*_audioThread = std::make_shared<ofxHap::AudioThread>(parameters, sampleRate, _buffer, *this);
         _audioThread->setVolume(_volume);
-        _audioThread->sync(_clock, false);
+        _audioThread->sync(_clock, false);*/
     }
 }
 
@@ -1000,6 +1000,8 @@ ofxHapPlayer::AudioOutput::~AudioOutput()
 
 unsigned int ofxHapPlayer::AudioOutput::getBestRate(unsigned int r) const
 {
+    return (unsigned int) 0; 
+    /*
     auto devices = _soundStream.getDeviceList();
     for (const auto& device : devices) {
         if (device.isDefaultOutput)
@@ -1024,6 +1026,7 @@ unsigned int ofxHapPlayer::AudioOutput::getBestRate(unsigned int r) const
         }
     }
     return r;
+    */
 }
 
 void ofxHapPlayer::AudioOutput::configure(int channels, int sampleRate, std::shared_ptr<ofxHap::RingBuffer> buffer)
@@ -1037,7 +1040,7 @@ void ofxHapPlayer::AudioOutput::start()
 {
     if (!_started)
     {
-        ofSoundStreamSettings settings;
+        /*ofSoundStreamSettings settings;
         settings.numInputChannels = 0;
         settings.numOutputChannels = _channels;
         settings.sampleRate = _sampleRate;
@@ -1047,7 +1050,7 @@ void ofxHapPlayer::AudioOutput::start()
         settings.bufferSize = 128;
         settings.numBuffers = 2;
 
-        _started = _soundStream.setup(settings);
+        _started = _soundStream.setup(settings);*/
         if (!_started)
         {
             ofLogError("ofxHapPlayer", "Error starting audio playback.");
@@ -1055,19 +1058,19 @@ void ofxHapPlayer::AudioOutput::start()
     }
     else
     {
-        _soundStream.start();
+        //_soundStream.start();
     }
 }
 
 void ofxHapPlayer::AudioOutput::stop()
 {
-    _soundStream.stop();
+    //_soundStream.stop();
 }
 
 void ofxHapPlayer::AudioOutput::close()
 {
-    _soundStream.stop();
-    _soundStream.close();
+    //_soundStream.stop();
+    //_soundStream.close();
     _started = false;
 }
 
